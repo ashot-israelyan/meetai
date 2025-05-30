@@ -11,9 +11,9 @@ import { OctagonAlertIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 
-import { Alert, AlertTitle } from '../../../../components/ui/alert';
-import { Button } from '../../../../components/ui/button';
-import { Card, CardContent } from '../../../../components/ui/card';
+import { Alert, AlertTitle } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -21,9 +21,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../components/ui/form';
-import { Input } from '../../../../components/ui/input';
-import { authClient } from '../../../../lib/auth-client';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { authClient } from '@/lib/auth-client';
 
 const formSchema = z
   .object({
