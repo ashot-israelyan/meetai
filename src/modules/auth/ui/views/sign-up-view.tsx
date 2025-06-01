@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OctagonAlertIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import z from 'zod';
 
 import { Alert, AlertTitle } from '@/components/ui/alert';
@@ -37,6 +39,8 @@ const formSchema = z
   });
 
 export const SignupView = () => {
+  const router = useRouter();
+
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -59,9 +63,11 @@ export const SignupView = () => {
         name: data.name,
         email: data.email,
         password: data.password,
-        callbackURL: '/',
       },
       {
+        onSuccess: () => {
+          router.push('/');
+        },
         onError: ({ error }) => {
           setError(error.message);
         },
@@ -185,7 +191,7 @@ export const SignupView = () => {
                     type="button"
                     className="w-full"
                   >
-                    Google
+                    <FaGoogle />
                   </Button>
                   <Button
                     disabled={pending}
@@ -194,7 +200,7 @@ export const SignupView = () => {
                     type="button"
                     className="w-full"
                   >
-                    Github
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className="text-center text-sm">

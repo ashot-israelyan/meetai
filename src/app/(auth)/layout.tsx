@@ -14,7 +14,7 @@ const Layout: FC<Props> = async ({ children }) => {
     headers: await headers(),
   });
 
-  if (session) {
+  if (!!session) {
     redirect('/');
   }
 
