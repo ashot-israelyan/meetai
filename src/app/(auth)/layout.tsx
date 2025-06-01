@@ -1,15 +1,11 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/lib/auth';
 
-interface Props {
-  children: ReactNode;
-}
-
-const Layout: FC<Props> = async ({ children }) => {
+const Layout: FC<PropsWithChildren> = async ({ children }) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
