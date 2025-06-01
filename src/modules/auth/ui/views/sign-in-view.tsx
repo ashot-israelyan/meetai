@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OctagonAlertIcon } from 'lucide-react';
@@ -31,7 +30,6 @@ const formSchema = z.object({
 });
 
 export const SignInView = () => {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -51,11 +49,29 @@ export const SignInView = () => {
       {
         email: data.email,
         password: data.password,
+        callbackURL: '/',
       },
       {
-        onSuccess: () => {
-          router.push('/');
+        onError: ({ error }) => {
+          setError(error.message);
         },
+        onResponse: () => {
+          setPending(false);
+        },
+      }
+    );
+  };
+
+  const onSocial = (provider: 'github' | 'google') => {
+    setError(null);
+    setPending(true);
+
+    authClient.signIn.social(
+      {
+        provider,
+        callbackURL: '/',
+      },
+      {
         onError: ({ error }) => {
           setError(error.message);
         },
@@ -122,10 +138,22 @@ export const SignInView = () => {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <Button disabled={pending} variant="outline" type="button" className="w-full">
+                  <Button
+                    disabled={pending}
+                    onClick={() => onSocial('google')}
+                    variant="outline"
+                    type="button"
+                    className="w-full"
+                  >
                     Google
                   </Button>
-                  <Button disabled={pending} variant="outline" type="button" className="w-full">
+                  <Button
+                    disabled={pending}
+                    onClick={() => onSocial('github')}
+                    variant="outline"
+                    type="button"
+                    className="w-full"
+                  >
                     Github
                   </Button>
                 </div>
