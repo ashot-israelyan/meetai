@@ -7,7 +7,7 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { auth } from '@/lib/auth';
-import { AgentsListHeader } from '@/modules/agents/components/agents-list-header';
+import { AgentsListHeader } from '@/modules/agents/ui/components/agents-list-header';
 import {
   AgentsView,
   AgentsViewError,
