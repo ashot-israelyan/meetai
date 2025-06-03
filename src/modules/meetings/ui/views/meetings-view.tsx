@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { DataTable } from '@/components/data-table';
+import { EmptyState } from '@/components/empty-state';
 import { ErrorState } from '@/components/error-state';
 import { LoadingState } from '@/components/loading-state';
 import { columns } from '@/modules/meetings/ui/components/columns';
@@ -23,6 +24,13 @@ export const MeetingsView = () => {
         data={data.items}
         onRowClick={(row) => router.push(`/meetings/${row.id}`)}
       />
+
+      {data.items.length === 0 && (
+        <EmptyState
+          title="Create your first meeting"
+          description="Schedule a meeting to connect with others. Each meeting lets you collaborate, share ideas, and interact with participants in real time."
+        />
+      )}
     </div>
   );
 };
