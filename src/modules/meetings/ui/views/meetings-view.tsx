@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
+import { DataPagination } from '@/components/data-pagination';
 import { DataTable } from '@/components/data-table';
 import { EmptyState } from '@/components/empty-state';
 import { ErrorState } from '@/components/error-state';
@@ -15,7 +16,7 @@ import { useTRPC } from '@/trpc/client';
 export const MeetingsView = () => {
   const router = useRouter();
   const trpc = useTRPC();
-  const [filters] = useMeetingsFilters();
+  const [filters, setFilters] = useMeetingsFilters();
 
   const { data } = useSuspenseQuery(trpc.meetings.getMany.queryOptions({ ...filters }));
 
@@ -25,6 +26,12 @@ export const MeetingsView = () => {
         columns={columns}
         data={data.items}
         onRowClick={(row) => router.push(`/meetings/${row.id}`)}
+      />
+
+      <DataPagination
+        page={filters.page}
+        totalPages={data.totalPages}
+        onPageChange={(page) => setFilters({ page })}
       />
 
       {data.items.length === 0 && (
