@@ -8,14 +8,16 @@ import { DataTable } from '@/components/data-table';
 import { EmptyState } from '@/components/empty-state';
 import { ErrorState } from '@/components/error-state';
 import { LoadingState } from '@/components/loading-state';
+import { useMeetingsFilters } from '@/modules/meetings/hooks/use-meetings-filters';
 import { columns } from '@/modules/meetings/ui/components/columns';
 import { useTRPC } from '@/trpc/client';
 
 export const MeetingsView = () => {
   const router = useRouter();
   const trpc = useTRPC();
+  const [filters] = useMeetingsFilters();
 
-  const { data } = useSuspenseQuery(trpc.meetings.getMany.queryOptions({}));
+  const { data } = useSuspenseQuery(trpc.meetings.getMany.queryOptions({ ...filters }));
 
   return (
     <div className="flex-1 pb-4 px-4 md:px-8 flex flex-col gap-y-4">
