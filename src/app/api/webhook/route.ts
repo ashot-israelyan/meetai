@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
   const eventType = (payload as Record<string, unknown>)?.type;
 
-  if (eventType === 'call.session.started') {
+  if (eventType === 'call.session_started') {
     const event = payload as CallSessionStartedEvent;
     const meetingId = event.call.custom?.meetingId;
 
