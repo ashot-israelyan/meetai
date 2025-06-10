@@ -23,5 +23,5 @@
 		"decorators-legacy"
 	],
 	"importOrderCaseInsensitive": true,
-	"removeUnused": true
+	"removeUnused": false
 }

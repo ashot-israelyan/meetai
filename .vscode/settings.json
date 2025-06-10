@@ -1,8 +1,8 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.removeUnused": false,
-    "source.organizeImports": true
+    "source.fixAll": "explicit",
+    "source.removeUnused": "never",
+    "source.organizeImports": "explicit"
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

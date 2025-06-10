@@ -19,6 +19,8 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { formatDuration } from '@/lib/utils';
 import { MeetingGetOne } from '@/modules/meetings/types';
+import { ChatProvider } from '@/modules/meetings/ui/components/chat-provider';
+import { Transcript } from '@/modules/meetings/ui/components/transcript';
 
 interface Props {
   data: MeetingGetOne;
@@ -63,6 +65,12 @@ export const CompletedState: FC<Props> = ({ data }) => {
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </div>
+        <TabsContent value="chat">
+          <ChatProvider meetingId={data.id} />
+        </TabsContent>
+        <TabsContent value="transcript">
+          <Transcript meetingId={data.id} />
+        </TabsContent>
         <TabsContent value="recording">
           <div className="bg-white rounded-lg border px-4 py-5">
             <video src={data.recordingUrl!} className="w-full rounded-lg" controls />
