@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
@@ -30,6 +32,7 @@ interface AgentFormProps {
 
 export const AgentForm: FC<AgentFormProps> = ({ onSuccess, onCancel, initialValues }) => {
   const trpc = useTRPC();
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   const createAgent = useMutation(
@@ -37,10 +40,16 @@ export const AgentForm: FC<AgentFormProps> = ({ onSuccess, onCancel, initialValu
       onSuccess: async () => {
         await queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
 
+        await queryClient.invalidateQueries(trpc.premium.getFreeUsage.queryOptions());
+
         onSuccess?.();
       },
       onError: (error) => {
         toast.error(error.message);
+
+        if (error.data?.code === 'FORBIDDEN') {
+          router.push('/upgrade');
+        }
       },
     })
   );
