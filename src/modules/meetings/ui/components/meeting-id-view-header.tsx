@@ -51,7 +51,7 @@ export const MeetingIdViewHeader: FC<Props> = ({ meetingId, meetingName, onEdit,
 
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
-          <Button>
+          <Button variant="ghost">
             <MoreVerticalIcon />
           </Button>
         </DropdownMenuTrigger>

@@ -51,7 +51,7 @@ export const AgentIdViewHeader: FC<Props> = ({ agentId, agentName, onEdit, onRem
 
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
-          <Button>
+          <Button value="ghost">
             <MoreVerticalIcon />
           </Button>
         </DropdownMenuTrigger>
